@@ -102,17 +102,22 @@ fetch("https://api.cricapi.com/v1/currentMatches?apikey=YOURKEY&offset=0")
 
 .then(res => res.json())
 
-.then(data => {
+.then(data => {let liveMatch = data.data.find(m => m.matchStarted == true)
 
-let match = data.data[0]
+document.querySelector(".match").innerText =
+liveMatch.teamInfo[0].shortname + " vs " +
+liveMatch.teamInfo[1].shortname
 
-document.getElementById("runs").innerText = match.score[0].r + "/" + match.score[0].w
+document.getElementById("runs").innerText =
+liveMatch.score[0].r + "/" + liveMatch.score[0].w
 
-document.getElementById("overs").innerText = match.score[0].o + " overs"
+document.getElementById("overs").innerText =
+liveMatch.score[0].o + " overs"
 
 })
 
 },5000)
+
 
 </script>
 
