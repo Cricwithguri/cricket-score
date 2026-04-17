@@ -31,16 +31,31 @@ color:#22c55e;
 
 <h1>IND vs AUS</h1>
 
-<div class="score">
+<div class="score" id="runs">
 152/3
 </div>
 
-<p>17.2 overs</p>
-
+<p id="overs">17.2 overs</p>
+  
 <p>Kohli 45 (32)</p>
 <p>Rohit 30 (21)</p>
 
 </div>
+<script>
 
+setInterval(function(){
+
+fetch("score.json")
+.then(response => response.json())
+.then(data => {
+
+document.getElementById("runs").innerText = data.score;
+document.getElementById("overs").innerText = data.overs;
+
+});
+
+},5000);
+
+</script>
 </body>
 </html>
