@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>Live Cricket Score</title>
 
 <style>
@@ -12,13 +14,41 @@ font-family:Arial;
 text-align:center;
 }
 
-.scoreboard{
-margin-top:150px;
+.container{
+margin-top:120px;
+}
+
+.match{
+font-size:30px;
+margin-bottom:20px;
 }
 
 .score{
-font-size:60px;
+font-size:70px;
 color:#22c55e;
+}
+
+.overs{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.players{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.balls{
+margin-top:40px;
+}
+
+.ball{
+display:inline-block;
+background:#1e293b;
+padding:10px 14px;
+margin:5px;
+border-radius:8px;
+font-weight:bold;
 }
 
 </style>
@@ -27,35 +57,77 @@ color:#22c55e;
 
 <body>
 
-<div class="scoreboard">
+<div class="container">
 
-<h1>IND vs AUS</h1>
+<div class="match">
+IND vs AUS
+</div>
 
 <div class="score" id="runs">
 152/3
 </div>
 
-<p id="overs">17.2 overs</p>
-  
-<p>Kohli 45 (32)</p>
-<p>Rohit 30 (21)</p>
+<div class="overs" id="overs">
+17.2 overs
+</div>
+
+<div class="players">
+
+<p id="bat1">Kohli 45 (32)</p>
+
+<p id="bat2">Rohit 30 (21)</p>
 
 </div>
+
+<h3>Last Over</h3>
+
+<div class="balls" id="balls">
+
+<span class="ball">1</span>
+<span class="ball">4</span>
+<span class="ball">0</span>
+<span class="ball">2</span>
+<span class="ball">1</span>
+<span class="ball">6</span>
+
+</div>
+
+</div>
+
 <script>
 
 setInterval(function(){
 
 fetch("score.json")
-.then(response => response.json())
+
+.then(res => res.json())
+
 .then(data => {
 
 document.getElementById("runs").innerText = data.score;
+
 document.getElementById("overs").innerText = data.overs;
+
+document.getElementById("bat1").innerText = data.batsman1;
+
+document.getElementById("bat2").innerText = data.batsman2;
+
+document.getElementById("balls").innerHTML = "";
+
+data.lastover.forEach(function(ball){
+
+document.getElementById("balls").innerHTML +=
+
+'<span class="ball">'+ball+'</span>';
+
+});
 
 });
 
 },5000);
 
 </script>
+
 </body>
+
 </html>
