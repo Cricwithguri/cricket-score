@@ -98,33 +98,21 @@ IND vs AUS
 
 setInterval(function(){
 
-fetch("score.json")
+fetch("https://api.cricapi.com/v1/currentMatches?apikey=YOURKEY&offset=0")
 
 .then(res => res.json())
 
 .then(data => {
 
-document.getElementById("runs").innerText = data.score;
+let match = data.data[0]
 
-document.getElementById("overs").innerText = data.overs;
+document.getElementById("runs").innerText = match.score[0].r + "/" + match.score[0].w
 
-document.getElementById("bat1").innerText = data.batsman1;
+document.getElementById("overs").innerText = match.score[0].o + " overs"
 
-document.getElementById("bat2").innerText = data.batsman2;
+})
 
-document.getElementById("balls").innerHTML = "";
-
-data.lastover.forEach(function(ball){
-
-document.getElementById("balls").innerHTML +=
-
-'<span class="ball">'+ball+'</span>';
-
-});
-
-});
-
-},5000);
+},5000)
 
 </script>
 
