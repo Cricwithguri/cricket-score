@@ -80,9 +80,8 @@ IND vs AUS
 
 <div class="players">
 
-<p id="bat1">Kohli 45 (32)</p>
-
-<p id="bat2">Rohit 30 (21)</p>
+<p id="bat1">Batsman 1</p>
+<p id="bat2">Batsman 2</p>
 
 </div>
 
@@ -119,7 +118,13 @@ liveMatch.teamInfo[1].shortname
 
 document.getElementById("runs").innerText =
 liveMatch.score[0].r + "/" + liveMatch.score[0].w
+  
+document.getElementById("bat1").innerText =
+match.score[0].inning + " batting"
 
+document.getElementById("bat2").innerText =
+"Match Type: " + match.matchType
+  
 document.getElementById("overs").innerText =
 liveMatch.score[0].o + " overs"
 
