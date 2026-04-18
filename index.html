@@ -108,25 +108,21 @@ fetch("https://api.cricapi.com/v1/currentMatches?apikey=d9f084e7-2731-43ea-b5da-
 
 .then(data => {
 
-let liveMatch = data.data.find(m => m.matchStarted == true)
+let match = data.data[0]
 
-if(!liveMatch) return
-
-document.querySelector(".match").innerText =
-liveMatch.teamInfo[0].shortname + " vs " +
-liveMatch.teamInfo[1].shortname
+document.querySelector(".match").innerText = match.name
 
 document.getElementById("runs").innerText =
-liveMatch.score[0].r + "/" + liveMatch.score[0].w
-  
+match.score[0].r + "/" + match.score[0].w
+
+document.getElementById("overs").innerText =
+(match.score[0].o || match.score[0].overs) + " overs"
+
 document.getElementById("bat1").innerText =
-match.score[0].inning + " batting"
+match.score[0].inning
 
 document.getElementById("bat2").innerText =
 "Match Type: " + match.matchType
-  
-document.getElementById("overs").innerText =
-liveMatch.score[0].o + " overs"
 
 })
 
@@ -135,7 +131,6 @@ liveMatch.score[0].o + " overs"
 },5000)
 
 </script>
-
 </body>
 
 </html>
