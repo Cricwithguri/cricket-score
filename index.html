@@ -102,14 +102,16 @@ IND vs AUS
 </div>
 
 <script>
-
+  
 setInterval(function(){
 
-fetch("https://api.cricapi.com/v1/currentMatches?apikey=YOURKEY&offset=0")
-
+fetch("https://api.cricapi.com/v1/currentMatches?apikey=d9f084e7-2731-43ea-b5da-fc01601f9abf=0")
+  
 .then(res => res.json())
 
-.then(data => {let liveMatch = data.data.find(m => m.matchStarted == true)
+.then(data => {
+
+let liveMatch = data.data.find(m => m.matchStarted == true)
 
 document.querySelector(".match").innerText =
 liveMatch.teamInfo[0].shortname + " vs " +
@@ -124,7 +126,6 @@ liveMatch.score[0].o + " overs"
 })
 
 },5000)
-
 
 </script>
 
