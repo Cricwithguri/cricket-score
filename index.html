@@ -102,7 +102,7 @@ IND vs AUS
 
 setInterval(function(){
 
-fetch("https://api.cricapi.com/v1/currentMatches?apikey=d9f084e7-2731-43ea-b5da-fc01601f9abf&offset=0")
+fetch("https://api.cricapi.com/v1/cricScore?apikey=d9f084e7-2731-43ea-b5da-fc01601f9abf")
 
 .then(res => res.json())
 
@@ -110,19 +110,14 @@ fetch("https://api.cricapi.com/v1/currentMatches?apikey=d9f084e7-2731-43ea-b5da-
 
 let match = data.data[0]
 
-document.querySelector(".match").innerText = match.name
+document.querySelector(".match").innerText =
+match.t1 + " vs " + match.t2
 
 document.getElementById("runs").innerText =
-match.score[0].r + "/" + match.score[0].w
+match.score
 
 document.getElementById("overs").innerText =
-(match.score[0].o || match.score[0].overs) + " overs"
-
-document.getElementById("bat1").innerText =
-match.score[0].inning
-
-document.getElementById("bat2").innerText =
-"Match Type: " + match.matchType
+match.overs
 
 })
 
@@ -131,6 +126,7 @@ document.getElementById("bat2").innerText =
 },5000)
 
 </script>
+  
 </body>
 
 </html>
